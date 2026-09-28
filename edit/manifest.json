@@ -1,0 +1,152 @@
+{
+  "title": "Before Sunrise — RationalGo launch film",
+  "character_reference": "https://file.deepytb.com/reapi-slave2/tasks/task_01a0e8abca7b742f9a216fa9b8b843e3/0.jpg",
+  "generated": "2026-09-28",
+  "models": {
+    "keyframes": "Gemini 3 Pro Image (reapi via treg)",
+    "life_clips": "MiniMax Hailuo 2.3 i2v 768P 6s (treg)",
+    "establishing": "Runway Gen-4.5 (OpenRouter via treg)"
+  },
+  "end_card": {
+    "line": "You bring the dream. R.go runs the company.",
+    "url": "rationalgo.ai",
+    "seconds": 5
+  },
+  "timeline": [
+    {
+      "id": "bedroom",
+      "kind": "life",
+      "seconds": 5,
+      "keyframe_url": "https://file.deepytb.com/reapi-slave2/tasks/task_01a0e8b2bcca759a9493fb05731c586b/0.jpg",
+      "video_url": "https://video-product.cdn.minimax.io/inference_output/video/2026-09-29/1d4a6d5d-5988-42fb-bed1-12c8cca3bbcd/output_aigc.mp4"
+    },
+    {
+      "id": "stoop",
+      "kind": "life",
+      "seconds": 4,
+      "keyframe_url": "https://file.deepytb.com/reapi-slave2/tasks/task_01a0e8b2d7797385bf0278ac07e8c188/0.jpg",
+      "video_url": "https://video-product.cdn.minimax.io/inference_output/video/2026-09-29/604efe01-0a2e-460f-b5fa-f7e2d76f6304/output_aigc.mp4",
+      "vo": "Every morning I'm up before the city."
+    },
+    {
+      "id": "runway_establishing",
+      "kind": "optional",
+      "seconds": 4,
+      "file": "edit/out/clips/runway_timessq.mp4",
+      "source": "Runway Gen-4.5 via treg, gen-vid-1790612870-TU1RaCA4bp5G8fjHrt14"
+    },
+    {
+      "id": "times_square",
+      "kind": "life",
+      "seconds": 4,
+      "keyframe_url": "https://file.deepytb.com/reapi-slave2/tasks/task_01a0e8b3129570aca1be2d48837d26aa/0.jpg",
+      "video_url": "https://video-product.cdn.minimax.io/inference_output/video/2026-09-29/55122ba0-71e4-4131-88bf-7abe3e107a8d/output_aigc.mp4"
+    },
+    {
+      "id": "store_window",
+      "kind": "life",
+      "seconds": 6,
+      "keyframe_url": "https://file.deepytb.com/reapi-slave2/tasks/task_01a0e8b3882777c898a3306207cc0ca4/0.jpg",
+      "video_url": "https://video-product.cdn.minimax.io/inference_output/video/2026-09-29/b7978486-21f4-4663-ba09-b55a05d5f667/output_aigc.mp4",
+      "vo": "And every morning I think… why can't that be mine?"
+    },
+    {
+      "id": "red_steps",
+      "kind": "life",
+      "seconds": 4.5,
+      "keyframe_url": "https://file.deepytb.com/reapi-slave2/tasks/task_01a0e8b420897133923b8d9280f79445/0.jpg",
+      "video_url": "https://video-product.cdn.minimax.io/inference_output/video/2026-09-29/73bee4b2-715c-401b-9c3f-32956a02de44/output_aigc.mp4"
+    },
+    {
+      "id": "screen_prompt",
+      "kind": "screen",
+      "seconds": 4.5,
+      "file": "screens/renders/prompt.mp4",
+      "still": "screens/renders/prompt.png"
+    },
+    {
+      "id": "screen_glow",
+      "kind": "life",
+      "seconds": 3.5,
+      "keyframe_url": "https://file.deepytb.com/reapi-slave2/tasks/task_01a0e8b433e87659a332ae57554ba338/0.jpg",
+      "video_url": "https://video-product.cdn.minimax.io/inference_output/video/2026-09-29/f035ec85-7be7-44db-935c-8f16de2d225c/output_aigc.mp4"
+    },
+    {
+      "id": "screen_site",
+      "kind": "screen",
+      "seconds": 3.5,
+      "file": "screens/renders/site.mp4",
+      "still": "screens/renders/site.png"
+    },
+    {
+      "id": "coffee_cart",
+      "kind": "life",
+      "seconds": 5,
+      "keyframe_url": "https://file.deepytb.com/reapi-slave2/tasks/task_01a0e8b441e5770d85a8c2274239f665/0.jpg",
+      "video_url": "https://video-product.cdn.minimax.io/inference_output/video/2026-09-29/cb638845-cfe1-4cd3-b482-51385f2a9aaa/output_aigc.mp4",
+      "vo": "I kept my job. It kept working.",
+      "notification": "Found 10 suppliers in China. Emails sent."
+    },
+    {
+      "id": "screen_suppliers",
+      "kind": "screen",
+      "seconds": 4,
+      "file": "screens/renders/suppliers.mp4",
+      "still": "screens/renders/suppliers.png"
+    },
+    {
+      "id": "bryant_park",
+      "kind": "life",
+      "seconds": 5,
+      "keyframe_url": "https://file.deepytb.com/reapi-slave2/tasks/task_01a0e8b45319751aaae6c9301eff2dd8/0.jpg",
+      "video_url": "https://video-product.cdn.minimax.io/inference_output/video/2026-09-29/bad3396c-71eb-406e-a8b0-4f00a5a9638c/output_aigc.mp4",
+      "notification": "3 suppliers replied with sample quotes."
+    },
+    {
+      "id": "subway",
+      "kind": "life",
+      "seconds": 4,
+      "keyframe_url": "https://file.deepytb.com/reapi-slave2/tasks/task_01a0e8b469b37525ba497813e41fff67/0.jpg",
+      "video_url": "https://video-product.cdn.minimax.io/inference_output/video/2026-09-29/2a76c45e-36eb-4d7c-9ec4-1f0119707600/output_aigc.mp4"
+    },
+    {
+      "id": "screen_book",
+      "kind": "screen",
+      "seconds": 3,
+      "file": "screens/renders/book.mp4",
+      "still": "screens/renders/book.png"
+    },
+    {
+      "id": "fire_escape",
+      "kind": "life",
+      "seconds": 5,
+      "keyframe_url": "https://file.deepytb.com/reapi-slave2/tasks/task_01a0e8b47a2377c29a059e560a2c2b77/0.jpg",
+      "video_url": "https://video-product.cdn.minimax.io/inference_output/video/2026-09-29/9e527ba7-0890-41b1-9d0e-d9d69898b4ed/output_aigc.mp4",
+      "vo": "For once, I just got to live my day.",
+      "notification": "14 posts scheduled for Instagram + LinkedIn"
+    },
+    {
+      "id": "screen_social",
+      "kind": "screen",
+      "seconds": 3.5,
+      "file": "screens/renders/social.mp4",
+      "still": "screens/renders/social.png"
+    },
+    {
+      "id": "next_morning",
+      "kind": "life",
+      "seconds": 5,
+      "keyframe_url": "https://file.deepytb.com/reapi-slave2/tasks/task_01a0e8b48e98709fb20c50bcf3c234ca/0.jpg",
+      "video_url": "https://video-product.cdn.minimax.io/inference_output/video/2026-09-29/55148552-d7ca-4fb6-b9ae-0f8f3ece67fe/output_aigc.mp4",
+      "notification": "ALBA is live on Instagram + LinkedIn"
+    },
+    {
+      "id": "alba_hoodie",
+      "kind": "life",
+      "seconds": 6,
+      "keyframe_url": "https://file.deepytb.com/reapi-slave2/tasks/task_01a0e8b4a6cd72eb80c37d3be566c91b/0.jpg",
+      "video_url": "https://video-product.cdn.minimax.io/inference_output/video/2026-09-29/937ea1c2-1618-4552-9b76-c3b3f16e4708/output_aigc.mp4",
+      "vo": "This morning, the city woke up to me."
+    }
+  ]
+}

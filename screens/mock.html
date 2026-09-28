@@ -1,0 +1,152 @@
+<!doctype html>
+<!-- Placeholder screen flows for the edit. Swap each for a real rationalgo.ai capture (same 16:9 framing, same length). -->
+<html>
+<head>
+<meta charset="utf-8">
+<title>R.go mock screens</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,600&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#0e0f12; --panel:#16181d; --line:#262a31; --ink:#eef0f3; --mute:#8a919c; --accent:#ff7a45; --dawn1:#f6c9a8; --dawn2:#e9906b; --dawn3:#2b3a55; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html,body { width:1920px; height:1080px; background:var(--bg); color:var(--ink); font-family:Inter,system-ui,sans-serif; overflow:hidden; }
+  .browser { position:absolute; inset:60px 120px; background:var(--panel); border:1px solid var(--line); border-radius:18px; overflow:hidden; box-shadow:0 40px 120px rgba(0,0,0,.6); }
+  .bar { height:52px; display:flex; align-items:center; gap:10px; padding:0 20px; border-bottom:1px solid var(--line); }
+  .dot { width:12px; height:12px; border-radius:50%; background:#3a3f48; }
+  .url { margin-left:24px; flex:1; height:30px; border-radius:8px; background:#0f1115; color:var(--mute); font-size:15px; display:flex; align-items:center; padding:0 14px; }
+  .app { position:absolute; top:52px; left:0; right:0; bottom:0; display:flex; }
+  .side { width:240px; border-right:1px solid var(--line); padding:24px 18px; }
+  .logo { font-weight:700; font-size:22px; letter-spacing:-.5px; margin-bottom:28px; }
+  .logo span { color:var(--accent); }
+  .nav { color:var(--mute); font-size:15px; padding:10px 12px; border-radius:8px; margin-bottom:4px; }
+  .nav.on { background:#20242b; color:var(--ink); }
+  .main { flex:1; padding:40px 56px; position:relative; }
+  .scene { display:none; } .scene.on { display:block; }
+  h1 { font-size:40px; font-weight:600; letter-spacing:-1px; }
+  .sub { color:var(--mute); font-size:18px; margin-top:8px; }
+  .prompt { margin-top:160px; text-align:center; }
+  .box { margin:36px auto 0; width:1000px; min-height:130px; background:#0f1115; border:1px solid var(--line); border-radius:16px; padding:24px 28px; text-align:left; font-size:26px; line-height:1.4; }
+  .caret { display:inline-block; width:2px; height:30px; background:var(--accent); vertical-align:-5px; animation:blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity:0; } }
+  .fade { opacity:0; transform:translateY(12px); transition:all .5s ease; } .fade.in { opacity:1; transform:none; }
+  .row { display:flex; align-items:center; gap:18px; padding:16px 20px; border:1px solid var(--line); border-radius:12px; margin-top:10px; font-size:18px; background:#13151a; }
+  .row .n { width:34px; height:34px; border-radius:8px; background:#20242b; display:grid; place-items:center; font-size:14px; color:var(--mute); }
+  .row .city { color:var(--mute); width:200px; }
+  .pill { margin-left:auto; font-size:14px; padding:6px 12px; border-radius:99px; background:#20242b; color:var(--mute); }
+  .pill.ok { background:rgba(80,200,120,.15); color:#6fdc98; }
+  .pill.hot { background:rgba(255,122,69,.15); color:var(--accent); }
+  .site { margin-top:24px; height:760px; border-radius:14px; overflow:hidden; background:#faf6f1; color:#1d1a17; position:relative; }
+  .hero { height:420px; background:linear-gradient(180deg,var(--dawn3) 0%,var(--dawn2) 70%,var(--dawn1) 100%); display:flex; flex-direction:column; justify-content:flex-end; padding:48px; color:#fff; }
+  .hero .brand { font-family:Fraunces,serif; font-weight:300; font-size:96px; letter-spacing:12px; }
+  .hero .tag { font-size:22px; opacity:.9; margin-top:6px; }
+  .grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; padding:28px 48px; }
+  .card { height:220px; border-radius:10px; background:#ece4da; position:relative; }
+  .card::after { content:attr(data-l); position:absolute; left:14px; bottom:12px; font-size:15px; color:#5b524a; }
+  .book { display:grid; grid-template-columns:1.2fr 1fr; gap:24px; margin-top:28px; }
+  .page { background:#faf6f1; color:#1d1a17; border-radius:14px; padding:40px; height:360px; }
+  .page h3 { font-family:Fraunces,serif; font-weight:300; font-size:30px; margin-bottom:18px; }
+  .sw { display:flex; gap:14px; } .sw div { flex:1; height:170px; border-radius:10px; position:relative; }
+  .sw div::after { content:attr(data-h); position:absolute; left:10px; bottom:10px; font-size:13px; color:#fff; mix-blend-mode:difference; }
+  .cal { display:grid; grid-template-columns:repeat(7,1fr); gap:12px; margin-top:28px; }
+  .day { background:#13151a; border:1px solid var(--line); border-radius:12px; height:300px; padding:14px; font-size:14px; color:var(--mute); }
+  .post { margin-top:10px; border-radius:8px; padding:10px; font-size:13px; color:var(--ink); background:#20242b; }
+  .post .ph { height:80px; border-radius:6px; margin-bottom:8px; background:linear-gradient(160deg,var(--dawn3),var(--dawn2),var(--dawn1)); }
+  .toast { position:absolute; right:56px; bottom:48px; background:#20242b; border:1px solid var(--line); border-radius:14px; padding:18px 24px; font-size:18px; display:flex; gap:14px; align-items:center; }
+  .toast b { color:#6fdc98; }
+</style>
+</head>
+<body>
+<div class="browser">
+  <div class="bar"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="url" id="url">rationalgo.ai</div></div>
+  <div class="app">
+    <div class="side">
+      <div class="logo">R<span>.</span>go</div>
+      <div class="nav" data-s="prompt">New company</div>
+      <div class="nav" data-s="site">Website</div>
+      <div class="nav" data-s="suppliers">Suppliers</div>
+      <div class="nav" data-s="book">Brand book</div>
+      <div class="nav" data-s="social">Social</div>
+    </div>
+    <div class="main">
+
+      <div class="scene" id="prompt">
+        <div class="prompt">
+          <h1>What do you want to build?</h1>
+          <div class="sub">Describe it. R.go runs the rest.</div>
+          <div class="box"><span id="typed"></span><span class="caret"></span></div>
+        </div>
+      </div>
+
+      <div class="scene" id="site">
+        <h1>ALBA · Website</h1><div class="sub" id="siteStatus">Building…</div>
+        <div class="site">
+          <div class="hero fade" data-t="600"><div class="brand">ALBA</div><div class="tag">Clothes for women who start before sunrise.</div></div>
+          <div class="grid">
+            <div class="card fade" data-t="1300" data-l="Daybreak Hoodie · $88"></div>
+            <div class="card fade" data-t="1550" data-l="First Light Tee · $42"></div>
+            <div class="card fade" data-t="1800" data-l="5AM Jogger · $76"></div>
+            <div class="card fade" data-t="2050" data-l="Commute Coat · $164"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scene" id="suppliers">
+        <h1>Suppliers</h1><div class="sub" id="supStatus">Searching manufacturers for knitwear &amp; organic cotton…</div>
+        <div id="supList" style="margin-top:22px"></div>
+      </div>
+
+      <div class="scene" id="book">
+        <h1>ALBA · Brand book</h1><div class="sub">Logo, palette, type, voice</div>
+        <div class="book">
+          <div class="page fade" data-t="300" style="background:linear-gradient(180deg,var(--dawn3),var(--dawn2));color:#fff;display:flex;align-items:center;justify-content:center"><div style="font-family:Fraunces,serif;font-weight:300;font-size:120px;letter-spacing:18px">ALBA</div></div>
+          <div class="page fade" data-t="800"><h3>Palette</h3><div class="sw"><div style="background:#2b3a55" data-h="Pre-dawn"></div><div style="background:#e9906b" data-h="Ember"></div><div style="background:#f6c9a8" data-h="First light"></div><div style="background:#faf6f1;border:1px solid #ddd" data-h="Linen"></div></div></div>
+          <div class="page fade" data-t="1300"><h3>Type</h3><div style="font-family:Fraunces,serif;font-size:56px;font-weight:300">Up before the city.</div><div style="margin-top:18px;font-size:20px;color:#5b524a">Fraunces Light · Inter Regular</div></div>
+          <div class="page fade" data-t="1800"><h3>Voice</h3><div style="font-size:22px;line-height:1.6;color:#3a332d">Quiet. Early. Certain.<br>We speak like a friend on a morning walk, never like an ad.</div></div>
+        </div>
+      </div>
+
+      <div class="scene" id="social">
+        <h1>Social</h1><div class="sub">Instagram · LinkedIn</div>
+        <div class="cal" id="cal"></div>
+        <div class="toast fade" data-t="2600"><b>●</b> 14 posts scheduled · First post live on Instagram &amp; LinkedIn</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script>
+const s = new URLSearchParams(location.search).get('scene') || 'prompt';
+document.getElementById(s).classList.add('on');
+document.querySelector(`.nav[data-s="${s}"]`).classList.add('on');
+document.getElementById('url').textContent = 'rationalgo.ai/' + (s === 'prompt' ? '' : 'alba/' + s);
+document.querySelectorAll(`#${s} .fade`).forEach(el => setTimeout(() => el.classList.add('in'), +el.dataset.t));
+
+if (s === 'prompt') {
+  const text = "Build my clothing brand. It's called ALBA, clothes for women who start before sunrise.";
+  let i = 0; const t = document.getElementById('typed');
+  setTimeout(function tick() { t.textContent = text.slice(0, ++i); if (i < text.length) setTimeout(tick, 38 + Math.random() * 40); }, 500);
+}
+if (s === 'site') setTimeout(() => document.getElementById('siteStatus').textContent = 'Live at alba.shop ✓', 2600);
+if (s === 'suppliers') {
+  const sup = [['Dongguan Huayi Knitting','Dongguan'],['Guangzhou Linen & Co.','Guangzhou'],['Hangzhou Greenweave','Hangzhou'],['Ningbo Apparel Works','Ningbo'],['Shenzhen FineThread','Shenzhen'],['Xiamen Organic Mills','Xiamen'],['Suzhou Silkline','Suzhou'],['Qingdao Cotton Craft','Qingdao'],['Foshan Stitch House','Foshan'],['Wuxi Textile Studio','Wuxi']];
+  const list = document.getElementById('supList');
+  sup.forEach(([n, c], i) => setTimeout(() => {
+    const r = document.createElement('div'); r.className = 'row fade';
+    r.innerHTML = `<div class="n">${i + 1}</div><div>${n}</div><div class="city">${c}, China</div><div class="pill">Emailing…</div>`;
+    list.appendChild(r); requestAnimationFrame(() => r.classList.add('in'));
+    setTimeout(() => { const p = r.querySelector('.pill'); p.textContent = 'Email sent'; p.className = 'pill ok'; }, 900);
+    if (i < 3) setTimeout(() => { const p = r.querySelector('.pill'); p.textContent = 'Replied · quote ' + ['$11.40', '$12.10', '$10.85'][i] + '/unit'; p.className = 'pill hot'; }, 3200 + i * 250);
+  }, 250 + i * 160));
+  setTimeout(() => document.getElementById('supStatus').textContent = '10 suppliers contacted · follow-ups scheduled', 2200);
+}
+if (s === 'social') {
+  const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'], cal = document.getElementById('cal');
+  const caps = ['Up before the city.','Meet the Daybreak Hoodie','Why I started ALBA','5AM, Brooklyn Bridge','Made for early starts','Behind the samples','Good morning, NYC'];
+  days.forEach((d, i) => {
+    const el = document.createElement('div'); el.className = 'day'; el.innerHTML = d; cal.appendChild(el);
+    setTimeout(() => { const p = document.createElement('div'); p.className = 'post fade';
+      p.innerHTML = `<div class="ph"></div>${i % 2 ? 'in' : 'ig'} · ${caps[i]}`; el.appendChild(p); requestAnimationFrame(() => p.classList.add('in')); }, 300 + i * 220);
+  });
+}
+</script>
+</body>
+</html>

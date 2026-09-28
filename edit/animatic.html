@@ -1,0 +1,87 @@
+<!doctype html>
+<!-- Browser animatic: plays the timeline in edit/manifest.json straight from the generated URLs.
+     Open from the repo root through any static server, e.g. `python3 -m http.server` → /edit/animatic.html -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Before Sunrise animatic</title>
+<style>
+  :root { --bg:#0b0c0f; --ink:#f1f1f1; --mute:#8b9099; --accent:#ff7a45; }
+  * { box-sizing:border-box; margin:0; }
+  body { background:var(--bg); color:var(--ink); font-family:system-ui,sans-serif; padding:24px 16px; }
+  .wrap { max-width:1100px; margin:auto; }
+  h1 { font-weight:500; font-size:20px; margin-bottom:14px; }
+  h1 span { color:var(--mute); font-weight:400; }
+  .stage { position:relative; aspect-ratio:16/9; background:#000; border-radius:10px; overflow:hidden; }
+  .stage video, .stage img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .vo { position:absolute; left:0; right:0; bottom:7%; text-align:center; font-size:clamp(14px,2.2vw,26px); text-shadow:0 2px 12px #000; font-style:italic; }
+  .note { position:absolute; right:3%; top:5%; background:rgba(20,22,26,.8); backdrop-filter:blur(8px); border-radius:12px; padding:10px 16px; font-size:clamp(11px,1.4vw,16px); display:none; }
+  .note b { color:var(--accent); margin-right:6px; }
+  .end { position:absolute; inset:0; display:none; place-items:center; text-align:center; background:#000; }
+  .end div { font-size:clamp(18px,3vw,40px); } .end small { display:block; color:var(--accent); margin-top:10px; font-size:clamp(14px,2vw,26px); }
+  .bar { display:flex; gap:10px; margin:14px 0; align-items:center; }
+  button { background:var(--accent); color:#111; border:0; border-radius:8px; padding:9px 18px; font-weight:600; cursor:pointer; }
+  .strip { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; }
+  .strip figure { cursor:pointer; } .strip img { width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:6px; display:block; }
+  .strip figcaption { font-size:12px; color:var(--mute); margin-top:4px; }
+  .strip figure.on img { outline:2px solid var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Before Sunrise <span>· RationalGo launch film · animatic</span></h1>
+  <div class="stage" id="stage">
+    <div class="vo" id="vo"></div>
+    <div class="note" id="note"><b>R.go</b><span></span></div>
+    <div class="end" id="end"><div id="endLine"></div></div>
+  </div>
+  <div class="bar"><button id="play">▶ Play from start</button><span id="status" style="color:var(--mute);font-size:14px"></span></div>
+  <div class="strip" id="strip"></div>
+</div>
+<script>
+const stage = document.getElementById('stage'), vo = document.getElementById('vo'), note = document.getElementById('note');
+let shots = [], endCard, timer, idx = 0;
+
+function media(shot) {
+  if (shot.kind === 'screen' || shot.kind === 'optional') return { src: '../' + shot.file, poster: shot.still && '../' + shot.still };
+  return { src: shot.video_url, poster: shot.keyframe_url };
+}
+function show(i) {
+  clearTimeout(timer);
+  stage.querySelectorAll('video,img').forEach(e => e.remove());
+  document.getElementById('end').style.display = 'none';
+  document.querySelectorAll('.strip figure').forEach((f, j) => f.classList.toggle('on', j === i));
+  if (i >= shots.length) {
+    const end = document.getElementById('end');
+    document.getElementById('endLine').innerHTML = `${endCard.line}<small>${endCard.url}</small>`;
+    end.style.display = 'grid'; vo.textContent = ''; note.style.display = 'none';
+    document.getElementById('status').textContent = 'End';
+    return;
+  }
+  idx = i;
+  const s = shots[i], m = media(s), v = document.createElement('video');
+  Object.assign(v, { src: m.src, muted: true, autoplay: true, playsInline: true });
+  if (m.poster) v.poster = m.poster;
+  v.onerror = () => { if (m.poster) { const img = new Image(); img.src = m.poster; stage.prepend(img); } };
+  stage.prepend(v);
+  vo.textContent = s.vo ? '“' + s.vo + '”' : '';
+  note.style.display = s.notification ? 'block' : 'none';
+  note.querySelector('span').textContent = s.notification || '';
+  document.getElementById('status').textContent = `${i + 1}/${shots.length} · ${s.id}`;
+  timer = setTimeout(() => show(i + 1), s.seconds * 1000);
+}
+fetch('manifest.json').then(r => r.json()).then(m => {
+  shots = m.timeline.filter(s => s.kind !== 'optional'); endCard = m.end_card;
+  const strip = document.getElementById('strip');
+  shots.forEach((s, i) => {
+    const f = document.createElement('figure');
+    f.innerHTML = `<img src="${media(s).poster || ''}" alt=""><figcaption>${i + 1}. ${s.id.replace(/_/g, ' ')} · ${s.seconds}s</figcaption>`;
+    f.onclick = () => show(i); strip.appendChild(f);
+  });
+  show(0);
+});
+document.getElementById('play').onclick = () => show(0);
+</script>
+</body>
+</html>
