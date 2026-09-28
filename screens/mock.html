@@ -123,7 +123,7 @@ document.querySelectorAll(`#${s} .fade`).forEach(el => setTimeout(() => el.class
 if (s === 'prompt') {
   const text = "Build my clothing brand. It's called ALBA, clothes for women who start before sunrise.";
   let i = 0; const t = document.getElementById('typed');
-  setTimeout(function tick() { t.textContent = text.slice(0, ++i); if (i < text.length) setTimeout(tick, 38 + Math.random() * 40); }, 500);
+  setTimeout(function tick() { t.textContent = text.slice(0, ++i); if (i < text.length) setTimeout(tick, 18 + Math.random() * 18); }, 300);
 }
 if (s === 'site') setTimeout(() => document.getElementById('siteStatus').textContent = 'Live at alba.shop ✓', 2600);
 if (s === 'suppliers') {

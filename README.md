@@ -4,6 +4,8 @@ A ~75s film about **Maya**, a New Yorker who gets an idea outside an apparel sto
 
 | Path | What |
 |------|------|
+| `renders/before_sunrise_roughcut.mp4` | **The rough cut** (1080p, 80s, silent; no VO or music yet) |
+| `clips/`, `keyframes/` | The 12 raw Hailuo clips, the 12 keyframes and Maya's reference image |
 | `story/SCRIPT.md` | Character, beat sheet, VO, screen-capture shot list |
 | `edit/manifest.json` | Timeline: every shot, its keyframe, generated clip URL, and the prompt used |
 | `edit/assemble.py` | Downloads the clips and cuts `edit/out/before_sunrise_roughcut.mp4` (needs `ffmpeg` + `pip install pillow`) |
