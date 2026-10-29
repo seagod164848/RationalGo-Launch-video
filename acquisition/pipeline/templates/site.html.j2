@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ d.seo.title }}</title>
+<meta name="description" content="{{ d.seo.meta_description }}">
+<meta name="keywords" content="{{ d.seo.keywords | join(', ') }}">
+{% if not claimed %}<meta name="robots" content="noindex, nofollow">{% endif %}
+<link rel="canonical" href="{{ canonical }}">
+<meta property="og:title" content="{{ d.seo.title }}">
+<meta property="og:description" content="{{ d.seo.meta_description }}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ canonical }}">
+{% if hero_image %}<meta property="og:image" content="{{ hero_image }}">{% endif %}
+<meta name="geo.region" content="US-CT">
+<meta name="geo.placename" content="{{ town }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script type="application/ld+json">{{ jsonld | safe }}</script>
+<style>
+:root{
+  {% set t = themes[d.theme] %}
+  --brand:{{ t.brand }};--brand-ink:{{ t.ink }};--accent:{{ t.accent }};--bg:{{ t.bg }};--panel:{{ t.panel }};
+  --text:#1b1d21;--muted:#5b616b;--line:rgba(0,0,0,.09);--radius:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;color:var(--text);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.12;letter-spacing:-.01em}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:999px;font-weight:600;text-decoration:none;border:0;cursor:pointer;font-size:16px}
+.btn-primary{background:var(--accent);color:var(--brand-ink)}
+.btn-ghost{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.35)}
+.claim{position:sticky;top:0;z-index:50;background:#111;color:#fff;font-size:14px}
+.claim .wrap{display:flex;gap:12px;align-items:center;justify-content:space-between;padding-top:10px;padding-bottom:10px}
+.claim a{background:#fff;color:#111;padding:7px 14px;border-radius:999px;font-weight:600;text-decoration:none;white-space:nowrap}
+nav{background:var(--brand);color:#fff}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:18px;padding-bottom:18px}
+.logo{font-family:Fraunces,serif;font-size:22px;font-weight:700}
+nav .links{display:flex;gap:22px;font-size:15px}nav .links a{text-decoration:none;opacity:.85}
+.hero{background:var(--brand);color:#fff;position:relative;overflow:hidden}
+.hero.has-img{background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.7)),url('{{ hero_image }}') center/cover}
+.hero .wrap{padding-top:72px;padding-bottom:88px;position:relative}
+.hero h1{font-size:clamp(38px,6vw,68px);max-width:820px}
+.hero p{font-size:20px;opacity:.9;max-width:620px;margin:18px 0 30px}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);padding:7px 14px;border-radius:999px;font-size:14px}
+.hero:not(.has-img)::after{content:"";position:absolute;right:-120px;top:-120px;width:520px;height:520px;border-radius:50%;background:var(--accent);opacity:.18}
+section{padding:84px 0}
+.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:12px;font-weight:600;color:var(--brand)}
+h2{font-size:clamp(30px,4vw,44px);margin:8px 0 34px;max-width:700px}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+.card h3{font-size:21px;margin-bottom:8px}.card p{color:var(--muted)}
+.alt{background:var(--panel)}
+.alt .card{background:var(--bg)}
+.pkg{display:flex;flex-direction:column}.pkg.featured{border:2px solid var(--brand);transform:translateY(-6px)}
+.price{font-family:Fraunces,serif;font-size:30px;white-space:nowrap;margin:6px 0 14px}
+.pkg ul{list-style:none;margin-bottom:22px}.pkg li{padding:6px 0;border-bottom:1px solid var(--line);font-size:15px}
+.pkg li::before{content:"✓ ";color:var(--brand);font-weight:700}
+.sample{display:inline-block;font-size:12px;background:#fff4d6;color:#7a5600;padding:4px 10px;border-radius:999px;margin-bottom:18px}
+.quote{font-size:18px;line-height:1.55}.quote-by{margin-top:14px;font-weight:600;font-size:14px}
+.stars{color:#f5a623;letter-spacing:2px}
+.rating-big{display:flex;align-items:center;gap:16px;margin-bottom:28px}
+.rating-big b{font-family:Fraunces,serif;font-size:56px}
+.themes{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}.themes span{background:var(--bg);border:1px solid var(--line);padding:6px 12px;border-radius:999px;font-size:14px}
+.listing{padding:0;overflow:hidden}.listing img{width:100%;height:190px;object-fit:cover;display:block;background:#ddd}
+.listing div{padding:18px}.listing .p{font-family:Fraunces,serif;font-size:24px}
+.tag{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--brand)}
+.about{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.about p{font-size:18px;color:#33373d;margin-bottom:14px}
+.trust{list-style:none}.trust li{padding:14px 0;border-bottom:1px solid var(--line);font-weight:500}
+.trust li::before{content:"●";color:var(--accent);margin-right:10px}
+.areas{display:flex;flex-wrap:wrap;gap:10px}.areas span{background:var(--bg);border:1px solid var(--line);padding:10px 16px;border-radius:12px}
+details{border-bottom:1px solid var(--line);padding:18px 0}summary{font-weight:600;cursor:pointer;font-size:18px}details p{margin-top:10px;color:var(--muted)}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+form{display:grid;gap:12px}input,textarea,select{font:inherit;padding:14px;border-radius:12px;border:1px solid var(--line);background:#fff}
+footer{background:#111;color:#bbb;padding:40px 0;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.attr{font-size:12px;color:var(--muted);margin-top:16px}
+@media (max-width:760px){
+  nav .links{display:none}.about,.contact{grid-template-columns:1fr}section{padding:60px 0}
+  .hero .wrap{padding-top:48px;padding-bottom:60px}.claim .wrap{font-size:13px}
+}
+</style>
+{% if pixel_id %}
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','{{ pixel_id }}');fbq('track','PageView');
+fbq('track','ViewContent',{content_ids:['{{ lead_id }}'],content_type:'product'});
+</script>
+{% endif %}
+</head>
+<body>
+
+{% if not claimed %}
+<div class="claim"><div class="wrap">
+  <span>👋 We built this for <b>{{ brand }}</b>. It's yours: live on your domain in 48 hours.</span>
+  <a href="{{ claim_url }}" onclick="window.fbq&&fbq('track','InitiateCheckout',{content_ids:['{{ lead_id }}'],value:{{ price }},currency:'USD'})">Claim it, ${{ price }}</a>
+</div></div>
+{% endif %}
+
+<nav><div class="wrap">
+  <div class="logo">{{ brand }}</div>
+  <div class="links">
+    <a href="#services">Services</a>
+    {% if listings %}<a href="#listings">Listings</a>{% endif %}
+    {% if products %}<a href="#shop">Shop</a>{% endif %}
+    {% if d.testimonials %}<a href="#reviews">Reviews</a>{% endif %}
+    <a href="#about">About</a><a href="#contact">Contact</a>
+  </div>
+  {% if phone %}<a class="btn btn-primary" href="tel:{{ phone }}" style="padding:10px 18px">{{ phone }}</a>{% endif %}
+</div></nav>
+
+<header class="hero{% if hero_image %} has-img{% endif %}"><div class="wrap">
+  <h1>{{ d.hero_headline }}</h1>
+  <p>{{ d.hero_sub }}</p>
+  <div class="ctas">
+    <a class="btn btn-primary" href="#contact">{{ primary_cta }}</a>
+    {% if phone %}<a class="btn btn-ghost" href="tel:{{ phone }}">Call {{ phone }}</a>{% endif %}
+  </div>
+  <div class="chips">{% for t in d.trust_points[:4] %}<span class="chip">{{ t }}</span>{% endfor %}</div>
+</div></header>
+
+<section id="services"><div class="wrap">
+  <div class="eyebrow">{{ services_eyebrow }}</div>
+  <h2>{{ services_heading }}</h2>
+  <div class="grid">{% for s in d.services %}
+    <div class="card"><h3>{{ s.name }}</h3><p>{{ s.description }}</p></div>
+  {% endfor %}</div>
+</div></section>
+
+{% if listings %}
+<section id="listings" class="alt"><div class="wrap">
+  <div class="eyebrow">Recent work</div><h2>Homes {{ owner_first or brand }} has listed and sold</h2>
+  <div class="grid">{% for l in listings %}
+    <a class="card listing" href="{{ l.url or '#' }}" style="text-decoration:none">
+      {% if l.photo %}<img src="{{ l.photo }}" alt="{{ l.address }}" loading="lazy">{% endif %}
+      <div><span class="tag">{{ l.label }}</span><div class="p">{{ l.price_fmt }}</div>
+      <div>{{ l.address }}</div><div style="color:var(--muted);font-size:14px">{{ l.specs }}</div></div>
+    </a>{% endfor %}</div>
+  <p class="attr">Listing data via Zillow.</p>
+</div></section>
+{% endif %}
+
+{% if products %}
+<section id="shop" class="alt"><div class="wrap">
+  <div class="eyebrow">Shop</div><h2>Bestsellers</h2>
+  <div class="grid">{% for p in products %}
+    <div class="card listing">{% if p.image %}<img src="{{ p.image }}" alt="{{ p.title }}" loading="lazy">{% endif %}
+      <div><h3 style="font-size:19px">{{ p.title }}</h3>{% if p.price %}<div class="p">${{ p.price }}</div>{% endif %}</div></div>
+  {% endfor %}</div>
+</div></section>
+{% endif %}
+
+{% if d.packages %}
+<section id="packages" {% if not listings and not products %}class="alt"{% endif %}><div class="wrap">
+  <div class="eyebrow">Pricing</div><h2>Simple packages</h2>
+  {% if not claimed %}<span class="sample">Sample pricing: you set your real prices after claiming</span>{% endif %}
+  <div class="grid">{% for p in d.packages %}
+    <div class="card pkg{% if p.featured %} featured{% endif %}"><h3>{{ p.name }}</h3><div class="price">{{ p.price }}</div>
+      <ul>{% for i in p.includes %}<li>{{ i }}</li>{% endfor %}</ul>
+      <a class="btn btn-primary" href="#contact" style="margin-top:auto;justify-content:center">Get started</a></div>
+  {% endfor %}</div>
+</div></section>
+{% endif %}
+
+{% if d.testimonials %}
+<section id="reviews" class="alt"><div class="wrap">
+  <div class="eyebrow">Reviews</div><h2>What {{ town }} says about {{ brand }}</h2>
+  {% if rating %}<div class="rating-big"><b>{{ rating }}</b><div><div class="stars">★★★★★</div><div>{{ review_count }} Google reviews</div></div></div>{% endif %}
+  {% if d.review_themes %}<div class="themes">{% for t in d.review_themes %}<span>{{ t }}</span>{% endfor %}</div>{% endif %}
+  <div class="grid">{% for t in d.testimonials %}
+    <div class="card"><div class="stars">{{ '★' * (t.rating or 5)|int }}</div><p class="quote">“{{ t.quote }}”</p>
+      <div class="quote-by">{{ t.author }} · {{ t.source }}</div></div>
+  {% endfor %}</div>
+  {% if maps_url %}<p class="attr">Reviews from <a href="{{ maps_url }}">Google</a>.</p>{% endif %}
+</div></section>
+{% endif %}
+
+<section id="about"><div class="wrap about">
+  <div><div class="eyebrow">About</div><h2>{{ about_heading }}</h2>
+    {% for para in d.about.split('\n') if para.strip() %}<p>{{ para }}</p>{% endfor %}</div>
+  <ul class="trust card">{% for t in d.trust_points %}<li>{{ t }}</li>{% endfor %}</ul>
+</div></section>
+
+<section id="areas" class="alt"><div class="wrap">
+  <div class="eyebrow">Service area</div><h2>Proudly serving {{ town }} and nearby</h2>
+  <div class="areas">{% for a in d.service_areas %}<span>{{ a }}, CT</span>{% endfor %}</div>
+</div></section>
+
+{% if d.faq %}
+<section id="faq"><div class="wrap" style="max-width:820px">
+  <div class="eyebrow">FAQ</div><h2>Good questions</h2>
+  {% for f in d.faq %}<details><summary>{{ f.q }}</summary><p>{{ f.a }}</p></details>{% endfor %}
+</div></section>
+{% endif %}
+
+<section id="contact" class="alt"><div class="wrap contact">
+  <div><div class="eyebrow">Contact</div><h2>{{ primary_cta }}</h2>
+    <p style="font-size:18px;color:var(--muted)">Tell us what you need and we'll get back to you the same day.</p>
+    <p style="margin-top:24px;font-weight:500">{{ brand }}<br>{{ town }}, Connecticut{% if phone %}<br>{{ phone }}{% endif %}</p>
+    {% if hours %}<p style="margin-top:16px;color:var(--muted);font-size:15px">{% for h in hours %}{{ h }}<br>{% endfor %}</p>{% endif %}
+  </div>
+  <form onsubmit="event.preventDefault();this.innerHTML='<p><b>Thanks! We\'ll be in touch shortly.</b></p>'">
+    <input placeholder="Your name" required><input type="email" placeholder="Email" required><input placeholder="Phone">
+    <select>{% for s in d.services %}<option>{{ s.name }}</option>{% endfor %}<option>Something else</option></select>
+    <textarea rows="4" placeholder="How can we help?"></textarea>
+    <button class="btn btn-primary" style="justify-content:center">Send</button>
+  </form>
+</div></section>
+
+<footer><div class="wrap">
+  <span>© {{ year }} {{ legal_name }} · {{ town }}, CT</span>
+  <span>{% for a in d.service_areas[:6] %}{{ d.services[0].name if d.services else '' }} in {{ a }}{% if not loop.last %} · {% endif %}{% endfor %}</span>
+  {% if not claimed %}<span>Preview by {{ agency }}. Not yet claimed by {{ brand }}.</span>{% endif %}
+</div></footer>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{
+  "spoken_name": "Skull and Homes Company",
+  "what_they_do_spoken": "plumbing, heating and remodeling in East Haven",
+  "hero_headline": "East Haven plumbing, heating & remodels, done once",
+  "hero_sub": "A licensed master plumber with 27 years on the tools, now running his own company. Free estimates across the Shoreline and Greater New Haven.",
+  "about": "Skull and Homes Company is Richard Esposito and Jason Bunce, based right here in East Haven. Richard has held a Connecticut P-1 unlimited plumbing contractor license since 1999 and a heating, piping & cooling license since 1996, so the person quoting your job is the person who knows how to do it.\nWe take on the work homeowners actually need: leaks and repairs, water heaters, heating systems, and kitchen and bath remodels where the plumbing has to be right before the tile goes down.",
+  "services": [
+    {"name": "Plumbing repairs", "description": "Leaks, clogs, running toilets, low pressure, burst pipes. Diagnosed and fixed by a licensed P-1 contractor."},
+    {"name": "Water heaters", "description": "Tank and tankless installs and replacements, sized for your household, with permits handled."},
+    {"name": "Heating & boilers", "description": "Boiler and hydronic heating repair, replacement and seasonal service before the cold hits."},
+    {"name": "Kitchen & bath remodels", "description": "Full remodels with the plumbing done properly behind the walls, from rough-in to final fixtures."},
+    {"name": "Fixture installs", "description": "Sinks, faucets, toilets, showers, disposals and dishwashers, installed clean and leak-free."},
+    {"name": "Gas piping", "description": "Gas lines for ranges, dryers, heaters and generators, installed to code."}
+  ],
+  "packages": [
+    {"name": "Service call", "price": "$149", "includes": ["Licensed plumber on site", "Diagnosis + written quote", "Fee credited if we do the work"]},
+    {"name": "Water heater swap", "price": "from $1,850", "includes": ["40–50 gal tank, installed", "Haul-away of the old unit", "Permit + code upgrades", "6-year tank warranty"], "featured": true},
+    {"name": "Bathroom remodel", "price": "from $14,500", "includes": ["Design walk-through", "Demo, rough-in, tile, fixtures", "One crew start to finish", "Written timeline"]}
+  ],
+  "service_areas": ["East Haven", "New Haven", "Branford", "North Haven", "North Branford", "Northford", "Hamden", "Guilford", "West Haven"],
+  "trust_points": ["CT P-1 Plumbing Contractor since 1999", "Heating & cooling licensed since 1996", "Owner-operated in East Haven", "Free written estimates"],
+  "testimonials": [],
+  "review_themes": [],
+  "faq": [
+    {"q": "Are you licensed and insured?", "a": "Yes. Richard holds Connecticut P-1 plumbing contractor license PLM.0203417 and a heating, piping & cooling license. You can verify both on the CT eLicense site."},
+    {"q": "Do you do emergency calls?", "a": "Call us. If water is coming through the ceiling, we'll tell you how to shut it off over the phone and get there as fast as we can."},
+    {"q": "Which towns do you cover?", "a": "East Haven and the surrounding towns: New Haven, Branford, North Haven, North Branford, Hamden, Guilford and West Haven."},
+    {"q": "Do you handle permits?", "a": "Yes. We pull the permits for water heaters, gas work and remodels and meet the inspector."}
+  ],
+  "seo": {
+    "title": "Plumber in East Haven, CT | Skull and Homes Company",
+    "meta_description": "Licensed P-1 plumber since 1999. Plumbing repairs, water heaters, heating and bath remodels in East Haven, Branford & New Haven. Free estimates.",
+    "keywords": ["plumber east haven ct", "east haven plumbing", "water heater replacement east haven", "boiler repair east haven ct", "bathroom remodel east haven", "plumber branford ct", "plumber new haven ct", "licensed plumber shoreline ct", "emergency plumber east haven", "kitchen remodel east haven ct"]
+  },
+  "theme": "harbor",
+  "founder_brief": "No web footprint yet for the LLC or either owner (searched business name and principal + trade + town). The strong verified hook is the state license: Richard Esposito, P-1 unlimited plumbing contractor since 1999 and heating license since 1996, East Haven. That's a 27-year tradesman going out on his own, so lead with 'you've done this for 27 years, now it's your name on the truck'. Co-owner Jason Bunce holds an active hairdresser license (2015), probably a family/partner co-founder rather than a trade partner; don't feature him in the pitch. Name is a pun ('Skull and Bones' → Skull and Homes), so they like personality and the site can lean into it once claimed.",
+  "confidence": 0.8,
+  "schema_type": "Plumber"
+}

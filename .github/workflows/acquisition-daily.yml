@@ -1,0 +1,47 @@
+name: acquisition-daily
+on:
+  schedule:
+    - cron: "17 10 * * *"   # ~06:17 ET; CT publishes the previous day's filings shortly after midnight
+  workflow_dispatch:
+    inputs:
+      day: {description: "YYYY-MM-DD (default: yesterday)", required: false}
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    defaults: {run: {working-directory: acquisition}}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - uses: actions/setup-node@v4
+        with: {node-version: "22"}
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg fonts-dejavu-core
+      - run: pip install -r requirements.txt && npm i playwright@1.48.2 && npx playwright install --with-deps chromium
+      # leads.db is the system of record; persist it between runs
+      - uses: actions/cache/restore@v4
+        with: {path: acquisition/out/leads.db, key: leads-db-${{ github.run_id }}, restore-keys: leads-db-}
+      - run: python3 run_daily.py ${{ inputs.day && format('--day {0}', inputs.day) || '' }}
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+          SERPER_API_KEY: ${{ secrets.SERPER_API_KEY }}
+          ZILLOW_RAPIDAPI_KEY: ${{ secrets.ZILLOW_RAPIDAPI_KEY }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVENLABS_VOICE_ID: ${{ vars.ELEVENLABS_VOICE_ID }}
+          SYNC_API_KEY: ${{ secrets.SYNC_API_KEY }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_PAGES_PROJECT: ${{ vars.CLOUDFLARE_PAGES_PROJECT }}
+          PREVIEW_BASE_URL: ${{ vars.PREVIEW_BASE_URL }}
+          STRIPE_PAYMENT_LINK: ${{ vars.STRIPE_PAYMENT_LINK }}
+          POSTAL_ADDRESS: ${{ vars.POSTAL_ADDRESS }}
+          INSTANTLY_API_KEY: ${{ secrets.INSTANTLY_API_KEY }}
+          INSTANTLY_CAMPAIGN_ID: ${{ vars.INSTANTLY_CAMPAIGN_ID }}
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+          META_AD_ACCOUNT_ID: ${{ vars.META_AD_ACCOUNT_ID }}
+          META_PIXEL_ID: ${{ vars.META_PIXEL_ID }}
+          META_AUDIENCE_ID: ${{ vars.META_AUDIENCE_ID }}
+      - uses: actions/cache/save@v4
+        if: always()
+        with: {path: acquisition/out/leads.db, key: leads-db-${{ github.run_id }}}

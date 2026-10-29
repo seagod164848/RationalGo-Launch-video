@@ -1,3 +1,5 @@
+> **Now:** the CT new-business acquisition engine lives in [`acquisition/`](acquisition/README.md). The launch film below is archived.
+
 # RationalGo launch film: "Before Sunrise"
 
 A ~75s film about **Maya**, a New Yorker who gets an idea outside an apparel store in Times Square and starts her clothing brand **ALBA** with R.go. The film follows her day, not the software; R.go shows up only as glances at a laptop or a buzzing phone.
